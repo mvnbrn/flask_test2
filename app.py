@@ -34,6 +34,7 @@ def index():
 @socketio.event
 def my_event(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
+    print("echo="+str(message))
     emit('my_response',
          {'data': message['data'], 'count': session['receive_count']})
 
@@ -41,6 +42,7 @@ def my_event(message):
 @socketio.event
 def my_broadcast_event(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
+    print("broadcast=" + str(message))
     emit('my_response',
          {'data': message['data'], 'count': session['receive_count']},
          broadcast=True)
